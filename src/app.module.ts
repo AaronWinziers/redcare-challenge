@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { validationSchema } from './config/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { ScoreModule } from './score/score.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { LoggingInterceptor } from './interceptors/logging.interceptor';
       isGlobal: true,
       cache: true,
     }),
+    ScoreModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor }],
