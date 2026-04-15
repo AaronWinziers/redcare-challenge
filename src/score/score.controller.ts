@@ -23,7 +23,12 @@ export class ScoreController {
     description:
       'Query string, using the same keyword and qualifier structure as in [GitHub queries](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories)',
   })
-  @ApiQuery({ name: 'sort', required: false })
+  @ApiQuery({
+    name: 'sort',
+    required: false,
+    type: 'string',
+    enum: ['stars', 'forks', 'help-wanted-issues', 'updated'],
+  })
   @ApiQuery({ name: 'order', required: false, type: 'string', enum: ['asc', 'desc'] })
   @ApiQuery({ name: 'per_page', required: false })
   @ApiQuery({ name: 'page', required: false })
