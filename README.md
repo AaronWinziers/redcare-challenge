@@ -33,6 +33,8 @@ docker build -t redcare-challenge:latest .
 docker run -p 127.0.0.1:3000:3000 redcare-challenge:latest
 ```
 
+Swagger documentation can be reached at `http://localhost:3000/docs`
+
 ## Run tests
 
 ```bash
