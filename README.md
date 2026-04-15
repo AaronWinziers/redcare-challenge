@@ -1,7 +1,7 @@
 # Redcare Pharmacy Coding Challenge
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Service that consumes part of the GitHub API and rates the popularity of repositories.
 
 ## Project setup
 
