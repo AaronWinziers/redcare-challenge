@@ -24,6 +24,15 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+Alternatively, the API can be run in a docker container:
+```bash
+# Build
+docker build -t redcare-challenge:latest .
+
+# Run the image 
+docker run -p 127.0.0.1:3000:3000 redcare-challenge:latest
+```
+
 ## Run tests
 
 ```bash
