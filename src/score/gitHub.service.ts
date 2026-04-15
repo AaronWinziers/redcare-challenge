@@ -2,7 +2,6 @@ import {
   ForbiddenException,
   HttpException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -38,7 +37,7 @@ type BaseMetaData = {
   updated_at: Date;
 };
 
-type FetchedRepository = BaseMetaData & {
+export type FetchedRepository = BaseMetaData & {
   owner: {
     login: string;
   };
@@ -137,6 +136,6 @@ export class GitHubService {
     if (e.status === 422) {
       throw new HttpException('Validation failed', 422);
     }
-    throw new InternalServerErrorException();
+    throw e;
   }
 }
