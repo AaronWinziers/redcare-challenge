@@ -1,14 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FetchRepositoryArgs, GitHubService, RepositoryMetadata } from './gitHub.service';
-
-export type RepoScore = {
-  owner: string;
-  name: string;
-  watchers_count: number;
-  forks_count: number;
-  updated_at: Date;
-  score: number;
-};
+import { FetchRepositoryArgs, GitHubService, RepositoryMetadata, SearchRepositoriesArgs } from './gitHub.service';
+import { PaginatedRepositoryScoreDto, RepositoryScoreDto } from './dto/repository-score.dto';
 
 @Injectable()
 export class ScoreService {
@@ -34,11 +26,19 @@ export class ScoreService {
     return Math.round((watchers_count * 0.6 + forks_count * 0.2) * recencyFactor);
   }
 
-  async scoreRepository(args: FetchRepositoryArgs): Promise<RepoScore> {
+  async scoreRepository(args: FetchRepositoryArgs): Promise<RepositoryScoreDto> {
     const repoMeta = await this.gitHubService.fetchRepository(args);
     return {
       ...repoMeta,
       score: this.weightedLinearRating(repoMeta),
+    };
+  }
+
+  async searchAndScoreRepositories(args: SearchRepositoriesArgs): Promise<PaginatedRepositoryScoreDto> {
+    const repoMetas = await this.gitHubService.searchRepositories(args);
+    return {
+      ...repoMetas,
+      items: repoMetas.items.map((repo) => ({ ...repo, score: this.weightedLinearRating(repo) })),
     };
   }
 }

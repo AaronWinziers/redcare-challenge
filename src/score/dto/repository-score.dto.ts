@@ -1,4 +1,4 @@
-import { IsDate, IsInt, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsInt, IsNumber, IsString } from 'class-validator';
 
 export class RepositoryScoreDto {
   @IsString()
@@ -18,4 +18,15 @@ export class RepositoryScoreDto {
 
   @IsNumber({ maxDecimalPlaces: 1 })
   score: number;
+}
+
+export class PaginatedRepositoryScoreDto {
+  @IsInt()
+  total_count: number;
+
+  @IsBoolean()
+  incomplete_results: boolean;
+
+  @IsArray()
+  items: RepositoryScoreDto[];
 }
